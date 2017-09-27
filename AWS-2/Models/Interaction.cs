@@ -10,11 +10,8 @@ namespace AWS_2.Models
     public class Interaction
     {
         [Key]
-        [Column(Order=1)]
-        public long TravlerId { get; set; }
-        [Key]
-        [Column(Order =2)]
-        public long RecieverId { get; set; }
+        public long InteractionId { get; set; }
+    
         public DateTime date { get; set; }
 
         public virtual Travler Travler { get; set; }

@@ -232,22 +232,24 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentsApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InteractionsApiController.cs" />
     <Compile Include="Controllers\ItemsApiController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RatesApiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708280039486_v1.cs" />
-    <Compile Include="Migrations\201708280039486_v1.Designer.cs">
-      <DependentUpon>201708280039486_v1.cs</DependentUpon>
+    <Compile Include="Migrations\201709271623295_v2.cs" />
+    <Compile Include="Migrations\201709271623295_v2.Designer.cs">
+      <DependentUpon>201709271623295_v2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ApplicationUserManager.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\DateTime2.cs" />
     <Compile Include="Models\Helpers.cs" />
@@ -348,8 +350,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708280039486_v1.resx">
-      <DependentUpon>201708280039486_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709271623295_v2.resx">
+      <DependentUpon>201709271623295_v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
