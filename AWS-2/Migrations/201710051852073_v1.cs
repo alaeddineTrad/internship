@@ -3,7 +3,7 @@ namespace AWS_2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class v2 : DbMigration
+    public partial class v1 : DbMigration
     {
         public override void Up()
         {
@@ -35,6 +35,7 @@ namespace AWS_2.Migrations
                         Password = c.String(unicode: false),
                         phone = c.Int(nullable: false),
                         JoinDate = c.DateTime(nullable: false, precision: 0),
+                        IsConnected = c.Boolean(nullable: false),
                         delevery_address = c.String(unicode: false),
                         address = c.String(unicode: false),
                         departure_date = c.String(unicode: false),
@@ -50,6 +51,7 @@ namespace AWS_2.Migrations
                         size = c.Int(nullable: false),
                         category = c.Int(nullable: false),
                         name = c.String(unicode: false),
+                        ImageUrl = c.String(unicode: false),
                         User_UserId = c.Long(),
                     })
                 .PrimaryKey(t => t.Id)

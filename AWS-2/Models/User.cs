@@ -16,6 +16,7 @@ namespace AWS_2.Models
         public string Password { get; set; }
         public int phone { get; set; }
         public DateTime JoinDate { get; set; }
+        public bool IsConnected { get; set; }
         public virtual ICollection<Item> Items { get; set; }
     }
 }

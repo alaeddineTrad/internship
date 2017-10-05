@@ -163,5 +163,5 @@ E:\stage  d'étè\internship\AWS-2\bin\System.Web.Http.Owin.xml
 E:\stage  d'étè\internship\AWS-2\obj\Debug\AWS-2.csprojResolveAssemblyReference.cache
 E:\stage  d'étè\internship\AWS-2\obj\Debug\AWS-2.dll
 E:\stage  d'étè\internship\AWS-2\obj\Debug\AWS-2.pdb
-E:\stage  d'étè\internship\AWS-2\obj\Debug\AWS_2.Migrations.v2.resources
+E:\stage  d'étè\internship\AWS-2\obj\Debug\AWS_2.Migrations.v1.resources
 E:\stage  d'étè\internship\AWS-2\obj\Debug\AWS-2.csproj.GenerateResource.Cache

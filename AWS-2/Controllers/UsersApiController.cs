@@ -12,53 +12,52 @@ using AWS_2.Models;
 
 namespace AWS_2.Controllers
 {
-    public class CommentsApiController : ApiController
+    public class UsersApiController : ApiController
     {
         private RDSContext db = new RDSContext();
 
-        // GET: api/CommentsApi
-        public IQueryable<Comment> GetInteractions()
+        // GET: api/UsersApi
+        public IQueryable<User> GetUsers()
         {
-            return db.Comments;
+            return db.Users;
         }
 
-        // GET: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(long id)
+        // GET: api/UsersApi/5
+        [ResponseType(typeof(User))]
+        public IHttpActionResult GetUser(long id)
         {
-            Comment comment = (Comment)db.Comments.Find(id);
-            if (comment == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(comment);
+            return Ok(user);
         }
 
-        // PUT: api/CommentsApi/5
+        // PUT: api/UsersApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutComment(long id, Comment comment)
+        public IHttpActionResult PutUser(long id, User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != comment.InteractionId)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
 
-            db.Entry(comment).State = EntityState.Modified;
+            db.Entry(user).State = EntityState.Modified;
 
             try
             {
-                comment.date = DateTime.Now;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +70,35 @@ namespace AWS_2.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CommentsApi
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult PostComment(Comment comment)
+        // POST: api/UsersApi
+        [ResponseType(typeof(User))]
+        public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            comment.date = DateTime.Now;
-            db.Comments.Add(comment);
+
+            db.Users.Add(user);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.InteractionId }, comment);
+            return CreatedAtRoute("DefaultApi", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult DeleteComment(long id)
+        // DELETE: api/UsersApi/5
+        [ResponseType(typeof(User))]
+        public IHttpActionResult DeleteUser(long id)
         {
-            Comment comment = (Comment)db.Interactions.Find(id);
-            if (comment == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            db.Interactions.Remove(comment);
+            db.Users.Remove(user);
             db.SaveChanges();
 
-            return Ok(comment);
+            return Ok(user);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +110,10 @@ namespace AWS_2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CommentExists(long id)
+        private bool UserExists(long id)
         {
-            return db.Interactions.Count(e => e.InteractionId == id) > 0;
+            return db.Users.Count(e => e.UserId == id) > 0;
         }
+
     }
 }

@@ -12,53 +12,52 @@ using AWS_2.Models;
 
 namespace AWS_2.Controllers
 {
-    public class CommentsApiController : ApiController
+    public class TravlersApiController : ApiController
     {
         private RDSContext db = new RDSContext();
 
-        // GET: api/CommentsApi
-        public IQueryable<Comment> GetInteractions()
+        // GET: api/TravlersApi
+        public IQueryable<Travler> GetUsers()
         {
-            return db.Comments;
+            return(IQueryable < Travler >) db.Travlers;
         }
 
-        // GET: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(long id)
+        // GET: api/TravlersApi/5
+        [ResponseType(typeof(Travler))]
+        public IHttpActionResult GetTravler(long id)
         {
-            Comment comment = (Comment)db.Comments.Find(id);
-            if (comment == null)
+            Travler travler = (Travler) db.Travlers.Find(id);
+            if (travler == null)
             {
                 return NotFound();
             }
 
-            return Ok(comment);
+            return Ok(travler);
         }
 
-        // PUT: api/CommentsApi/5
+        // PUT: api/TravlersApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutComment(long id, Comment comment)
+        public IHttpActionResult PutTravler(long id, Travler travler)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != comment.InteractionId)
+            if (id != travler.UserId)
             {
                 return BadRequest();
             }
 
-            db.Entry(comment).State = EntityState.Modified;
+            db.Entry(travler).State = EntityState.Modified;
 
             try
             {
-                comment.date = DateTime.Now;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentExists(id))
+                if (!TravlerExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +70,35 @@ namespace AWS_2.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CommentsApi
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult PostComment(Comment comment)
+        // POST: api/TravlersApi
+        [ResponseType(typeof(Travler))]
+        public IHttpActionResult PostTravler(Travler travler)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            comment.date = DateTime.Now;
-            db.Comments.Add(comment);
+
+            db.Travlers.Add(travler);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.InteractionId }, comment);
+            return CreatedAtRoute("DefaultApi", new { id = travler.UserId }, travler);
         }
 
-        // DELETE: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult DeleteComment(long id)
+        // DELETE: api/TravlersApi/5
+        [ResponseType(typeof(Travler))]
+        public IHttpActionResult DeleteTravler(long id)
         {
-            Comment comment = (Comment)db.Interactions.Find(id);
-            if (comment == null)
+            Travler travler = (Travler)db.Travlers.Find(id);
+            if (travler == null)
             {
                 return NotFound();
             }
 
-            db.Interactions.Remove(comment);
+            db.Travlers.Remove(travler);
             db.SaveChanges();
 
-            return Ok(comment);
+            return Ok(travler);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +110,9 @@ namespace AWS_2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CommentExists(long id)
+        private bool TravlerExists(long id)
         {
-            return db.Interactions.Count(e => e.InteractionId == id) > 0;
+            return db.Travlers.Count(e => e.UserId == id) > 0;
         }
     }
 }

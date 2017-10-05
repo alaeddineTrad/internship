@@ -19,6 +19,9 @@ namespace AWS_2.Models
             Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Item> Objects { get; set; }
+        public DbSet<Sender> Senders { get; set; }
+        public DbSet<Reciever> Recievers { get; set; }
+        public DbSet<Travler> Travlers { get; set; }
         public DbSet<Interaction> Interactions { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Rate> Rates { get; set; }
@@ -43,7 +46,6 @@ namespace AWS_2.Models
             return Set<T>().AsNoTracking();
         }
 
-
-
+        public System.Data.Entity.DbSet<AWS_2.Models.User> Users { get; set; }
     }
 }

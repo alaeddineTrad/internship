@@ -12,53 +12,52 @@ using AWS_2.Models;
 
 namespace AWS_2.Controllers
 {
-    public class CommentsApiController : ApiController
+    public class SendersApiController : ApiController
     {
         private RDSContext db = new RDSContext();
 
-        // GET: api/CommentsApi
-        public IQueryable<Comment> GetInteractions()
+        // GET: api/SendersApi
+        public IQueryable<Sender> GetUsers()
         {
-            return db.Comments;
+            return (IQueryable<Sender>)db.Senders;
         }
 
-        // GET: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(long id)
+        // GET: api/SendersApi/5
+        [ResponseType(typeof(Sender))]
+        public IHttpActionResult GetSender(long id)
         {
-            Comment comment = (Comment)db.Comments.Find(id);
-            if (comment == null)
+            Sender sender =(Sender)db.Senders.Find(id);
+            if (sender == null)
             {
                 return NotFound();
             }
 
-            return Ok(comment);
+            return Ok(sender);
         }
 
-        // PUT: api/CommentsApi/5
+        // PUT: api/SendersApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutComment(long id, Comment comment)
+        public IHttpActionResult PutSender(long id, Sender sender)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != comment.InteractionId)
+            if (id != sender.UserId)
             {
                 return BadRequest();
             }
 
-            db.Entry(comment).State = EntityState.Modified;
+            db.Entry(sender).State = EntityState.Modified;
 
             try
             {
-                comment.date = DateTime.Now;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentExists(id))
+                if (!SenderExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +70,35 @@ namespace AWS_2.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CommentsApi
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult PostComment(Comment comment)
+        // POST: api/SendersApi
+        [ResponseType(typeof(Sender))]
+        public IHttpActionResult PostSender(Sender sender)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            comment.date = DateTime.Now;
-            db.Comments.Add(comment);
+
+            db.Senders.Add(sender);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.InteractionId }, comment);
+            return CreatedAtRoute("DefaultApi", new { id = sender.UserId }, sender);
         }
 
-        // DELETE: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult DeleteComment(long id)
+        // DELETE: api/SendersApi/5
+        [ResponseType(typeof(Sender))]
+        public IHttpActionResult DeleteSender(long id)
         {
-            Comment comment = (Comment)db.Interactions.Find(id);
-            if (comment == null)
+            Sender sender = (Sender)db.Senders.Find(id);
+            if (sender == null)
             {
                 return NotFound();
             }
 
-            db.Interactions.Remove(comment);
+            db.Senders.Remove(sender);
             db.SaveChanges();
 
-            return Ok(comment);
+            return Ok(sender);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +110,9 @@ namespace AWS_2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CommentExists(long id)
+        private bool SenderExists(long id)
         {
-            return db.Interactions.Count(e => e.InteractionId == id) > 0;
+            return db.Senders.Count(e => e.UserId == id) > 0;
         }
     }
 }

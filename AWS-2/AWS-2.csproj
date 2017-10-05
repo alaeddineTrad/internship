@@ -239,13 +239,17 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RatesApiController.cs" />
+    <Compile Include="Controllers\RecieversApiController.cs" />
+    <Compile Include="Controllers\SendersApiController.cs" />
+    <Compile Include="Controllers\TravlersApiController.cs" />
+    <Compile Include="Controllers\UsersApiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709271623295_v2.cs" />
-    <Compile Include="Migrations\201709271623295_v2.Designer.cs">
-      <DependentUpon>201709271623295_v2.cs</DependentUpon>
+    <Compile Include="Migrations\201710051852073_v1.cs" />
+    <Compile Include="Migrations\201710051852073_v1.Designer.cs">
+      <DependentUpon>201710051852073_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -350,8 +354,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709271623295_v2.resx">
-      <DependentUpon>201709271623295_v2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710051852073_v1.resx">
+      <DependentUpon>201710051852073_v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

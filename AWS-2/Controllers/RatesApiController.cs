@@ -19,14 +19,14 @@ namespace AWS_2.Controllers
         // GET: api/RatesApi
         public IQueryable<Rate> GetInteractions()
         {
-            return (IQueryable<Rate>)db.Interactions;
+            return db.Rates;
         }
 
         // GET: api/RatesApi/5
         [ResponseType(typeof(Rate))]
         public IHttpActionResult GetRate(long id)
         {
-            Rate rate = (Rate)db.Interactions.Find(id);
+            Rate rate = db.Rates.Find(id);
             if (rate == null)
             {
                 return NotFound();
@@ -53,6 +53,7 @@ namespace AWS_2.Controllers
 
             try
             {
+                rate.date = DateTime.Now;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -78,8 +79,8 @@ namespace AWS_2.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.Interactions.Add(rate);
+            rate.date = DateTime.Now;
+            db.Rates.Add(rate);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = rate.InteractionId }, rate);

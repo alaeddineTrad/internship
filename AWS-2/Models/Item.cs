@@ -19,6 +19,7 @@ namespace AWS_2.Models
         public Size size { get; set; }
         public Category category { get; set; }
         public string name { get; set; }
+        public string ImageUrl { get; set; }
         public virtual User User { get; set; }
        
     }

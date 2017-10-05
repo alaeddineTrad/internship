@@ -12,53 +12,53 @@ using AWS_2.Models;
 
 namespace AWS_2.Controllers
 {
-    public class CommentsApiController : ApiController
+    public class RecieversApiController : ApiController
     {
         private RDSContext db = new RDSContext();
 
-        // GET: api/CommentsApi
-        public IQueryable<Comment> GetInteractions()
+        // GET: api/RecieversApi
+        public IQueryable<Reciever> GetUsers()
         {
-            return db.Comments;
+
+            return (IQueryable < Reciever > )db.Recievers;
         }
 
-        // GET: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(long id)
+        // GET: api/RecieversApi/5
+        [ResponseType(typeof(Reciever))]
+        public IHttpActionResult GetReciever(long id)
         {
-            Comment comment = (Comment)db.Comments.Find(id);
-            if (comment == null)
+            Reciever reciever = (Reciever) db.Recievers.Find(id);
+            if (reciever == null)
             {
                 return NotFound();
             }
 
-            return Ok(comment);
+            return Ok(reciever);
         }
 
-        // PUT: api/CommentsApi/5
+        // PUT: api/RecieversApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutComment(long id, Comment comment)
+        public IHttpActionResult PutReciever(long id, Reciever reciever)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != comment.InteractionId)
+            if (id != reciever.UserId)
             {
                 return BadRequest();
             }
 
-            db.Entry(comment).State = EntityState.Modified;
+            db.Entry(reciever).State = EntityState.Modified;
 
             try
             {
-                comment.date = DateTime.Now;
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentExists(id))
+                if (!RecieverExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace AWS_2.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CommentsApi
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult PostComment(Comment comment)
+        // POST: api/RecieversApi
+        [ResponseType(typeof(Reciever))]
+        public IHttpActionResult PostReciever(Reciever reciever)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            comment.date = DateTime.Now;
-            db.Comments.Add(comment);
+
+            db.Recievers.Add(reciever);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.InteractionId }, comment);
+            return CreatedAtRoute("DefaultApi", new { id = reciever.UserId }, reciever);
         }
 
-        // DELETE: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult DeleteComment(long id)
+        // DELETE: api/RecieversApi/5
+        [ResponseType(typeof(Reciever))]
+        public IHttpActionResult DeleteReciever(long id)
         {
-            Comment comment = (Comment)db.Interactions.Find(id);
-            if (comment == null)
+            Reciever reciever = (Reciever)db.Users.Find(id);
+            if (reciever == null)
             {
                 return NotFound();
             }
 
-            db.Interactions.Remove(comment);
+            db.Recievers.Remove(reciever);
             db.SaveChanges();
 
-            return Ok(comment);
+            return Ok(reciever);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace AWS_2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CommentExists(long id)
+        private bool RecieverExists(long id)
         {
-            return db.Interactions.Count(e => e.InteractionId == id) > 0;
+            return db.Recievers.Count(e => e.UserId == id) > 0;
         }
     }
 }
